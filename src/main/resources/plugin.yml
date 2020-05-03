@@ -1,0 +1,30 @@
+name: EternalStaffchat
+main: xyz.oribuin.staffchat.spigot.StaffChatSpigot
+version: '@version@'
+authors: [Oribuin]
+api-version: '1.13'
+description: 'A simple customizable StaffChat plugin for Spigot'
+website: https://oribuin.xyz/
+softdepend: [PlaceholderAPI]
+commands:
+  staffchat:
+    description: Send a message to the StaffChat.
+    usage: /staffchat <mesage>
+    aliases: [sc]
+
+  scadmin:
+    description: All admin commands for EternalStaffChat.
+    usage: /scadmin <reload>
+
+  sctoggle:
+    description: Toggle staffchat sending.
+    usage: /sctoggle
+
+permissions:
+  eternalsc.*:
+    description: All permissions for EternalStaffchat
+    children:
+      - 'eternalsc.use'
+      - 'eternalsc.reload'
+      - 'eternalsc.toggle'
+    default: op

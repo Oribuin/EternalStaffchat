@@ -1,0 +1,13 @@
+name: EternalStaffchat
+main: xyz.oribuin.staffchat.bungee.StaffChatBungee
+version: '@version@'
+author: Oribuin
+description: 'A simple customizable StaffChat plugin for Spigot'
+permissions:
+  eternalsc.*:
+    description: All permissions for EternalStaffchat
+    children:
+      - 'eternalsc.use'
+      - 'eternalsc.reload'
+      - 'eternalsc.toggle'
+    default: op

@@ -1,0 +1,17 @@
+prefix: '&bEternalSC &f» '
+
+# Command Messages
+commands:
+  toggle-enabled: '&bYou have &aEnabled&b StaffChat Toggle.'
+  toggle-disabled: '&bYou have &cDisabled&b StaffChat Toggle.'
+
+# Misc
+reload: '&bYou have reloaded EternalStaffChat &9(&7%version%&9)'
+
+# Error Messages
+invalid-permission: '&cYou do not have permission to execute this command.'
+invalid-command: '&bThat is not a valid command.'
+
+# Usage Commands
+invalid-arguments:
+  staffchat-command: '&bCorrect Arguments: &f/sc <message>'
