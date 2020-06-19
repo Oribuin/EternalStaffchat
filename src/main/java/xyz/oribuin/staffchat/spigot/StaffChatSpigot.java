@@ -19,8 +19,8 @@ import java.util.UUID;
 
 public class StaffChatSpigot extends JavaPlugin {
 
-    public List<UUID> toggleList = new ArrayList<>();
     private static StaffChatSpigot instance;
+    public List<UUID> toggleList = new ArrayList<>();
     private CommandManager commandManager;
     private ConfigManager configManager;
     private MessageManager messageManager;

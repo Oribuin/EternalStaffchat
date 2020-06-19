@@ -15,7 +15,6 @@ import java.util.UUID;
 
 public class CmdToggle implements TabExecutor {
 
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 

@@ -1,5 +1,6 @@
 package xyz.oribuin.staffchat.bungee.managers;
 
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -7,7 +8,6 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
-import org.bukkit.ChatColor;
 import xyz.oribuin.staffchat.bungee.StaffChatBungee;
 import xyz.oribuin.staffchat.bungee.utils.StringPlaceholders;
 

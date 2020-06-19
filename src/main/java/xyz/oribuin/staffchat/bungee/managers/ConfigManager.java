@@ -12,6 +12,16 @@ public class ConfigManager extends Manager {
         this.reload();
     }
 
+    @Override
+    public void reload() {
+        this.plugin.reloadConfig();
+        this.plugin.createConfig("config.yml");
+
+        Configuration config = this.plugin.getConfig("config.yml");
+        for (ConfigManager.Setting value : ConfigManager.Setting.values())
+            value.load(config);
+    }
+
     public enum Setting {
         USE_METRICS("bstats-metrics"),
 
@@ -107,16 +117,6 @@ public class ConfigManager extends Manager {
             this.value = config.get(this.key);
         }
 
-    }
-
-    @Override
-    public void reload() {
-        this.plugin.reloadConfig();
-        this.plugin.saveConfig(StaffChatBungee.getInstance(), "config.yml");
-
-        Configuration config = this.plugin.getConfig("config.yml");
-        for (ConfigManager.Setting value : ConfigManager.Setting.values())
-            value.load(config);
     }
 
 }

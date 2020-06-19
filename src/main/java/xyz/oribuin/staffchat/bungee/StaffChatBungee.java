@@ -4,10 +4,15 @@ import com.google.common.io.ByteStreams;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
+import xyz.oribuin.staffchat.bungee.commands.CmdAdmin;
+import xyz.oribuin.staffchat.bungee.commands.CmdStaffchat;
+import xyz.oribuin.staffchat.bungee.commands.CmdToggle;
+import xyz.oribuin.staffchat.bungee.listeners.PlayerChat;
 import xyz.oribuin.staffchat.bungee.managers.ConfigManager;
 import xyz.oribuin.staffchat.bungee.managers.MessageManager;
 import xyz.oribuin.staffchat.bungee.utils.StringPlaceholders;
@@ -19,28 +24,40 @@ import java.util.UUID;
 
 /**
  * Quick Note:
- *
+ * <p>
  * bungeecord plugins are ass
  */
 public class StaffChatBungee extends Plugin {
 
-    public List<UUID> toggleList = new ArrayList<>();
     private static StaffChatBungee instance;
+    public List<UUID> toggleList = new ArrayList<>();
     private ConfigManager configManager;
     private MessageManager messageManager;
+
+    public static StaffChatBungee getInstance() {
+        return instance;
+    }
 
     @Override
     public void onEnable() {
         instance = this;
 
+        createConfig("config.yml");
+        createConfig("messages.yml");
+
         this.configManager = new ConfigManager(this);
         this.messageManager = new MessageManager(this);
         this.reload();
 
-        createConfig("config.yml");
-        createConfig("messages.yml");
+        this.registerCommands(new CmdStaffchat(), new CmdAdmin(), new CmdToggle());
+        this.getProxy().getPluginManager().registerListener(this, new PlayerChat());
     }
 
+    private void registerCommands(Command... commands) {
+        for (Command cmd : commands) {
+            this.getProxy().getPluginManager().registerCommand(this, cmd);
+        }
+    }
 
     public void sendSc(CommandSender sender, String message) {
         if (sender instanceof ProxiedPlayer) {
@@ -77,10 +94,6 @@ public class StaffChatBungee extends Plugin {
         return this.messageManager;
     }
 
-    public static StaffChatBungee getInstance() {
-        return instance;
-    }
-
     public Configuration getConfig(String fileName) {
         Configuration config = null;
         try {
@@ -90,27 +103,6 @@ public class StaffChatBungee extends Plugin {
         }
 
         return config;
-    }
-
-    public void saveConfig(Plugin plugin, String fileName) {
-        if (plugin.getDataFolder().exists()) {
-            plugin.getDataFolder().mkdirs();
-        }
-
-        File file = new File(plugin.getDataFolder(), fileName);
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-                InputStream inputStream = this.getResourceAsStream(fileName);
-                FileOutputStream outputStream = new FileOutputStream(file);
-                ByteStreams.copy(inputStream, outputStream);
-
-                Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
-                ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, file);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public void reloadConfig() {
@@ -123,16 +115,21 @@ public class StaffChatBungee extends Plugin {
 
     public void createConfig(String fileName) {
         File configFile = new File(getDataFolder(), fileName);
-        if (configFile.exists()) {
-            try {
+        try {
+
+            if (!configFile.getParentFile().exists())
+                configFile.getParentFile().mkdir();
+
+            if (!configFile.exists()) {
                 configFile.createNewFile();
+                ;
                 try (InputStream inputStream = getResourceAsStream(fileName);
                      OutputStream os = new FileOutputStream(configFile)) {
                     ByteStreams.copy(inputStream, os);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -7,7 +7,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import xyz.oribuin.staffchat.spigot.StaffChatSpigot;
 import xyz.oribuin.staffchat.spigot.managers.ConfigManager;
-import xyz.oribuin.staffchat.spigot.managers.MessageManager;
 
 import java.util.List;
 import java.util.UUID;

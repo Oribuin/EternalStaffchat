@@ -68,6 +68,7 @@ public class CommandManager extends Manager implements TabExecutor {
             StringUtil.copyPartialMatches(subCommandName, commands, suggestions);
         }
 
+
         return suggestions;
     }
 

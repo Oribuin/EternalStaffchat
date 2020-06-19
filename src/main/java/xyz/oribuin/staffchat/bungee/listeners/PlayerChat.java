@@ -1,5 +1,6 @@
 package xyz.oribuin.staffchat.bungee.listeners;
 
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -7,13 +8,9 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
-import org.bukkit.ChatColor;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
 import xyz.oribuin.staffchat.bungee.StaffChatBungee;
 import xyz.oribuin.staffchat.bungee.managers.ConfigManager;
-import xyz.oribuin.staffchat.bungee.managers.MessageManager;
 
-import javax.swing.*;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,7 +27,7 @@ public class PlayerChat implements Listener {
         List<UUID> list = this.plugin.toggleList;
         if (event.getSender() instanceof ProxiedPlayer) {
             ProxiedPlayer player = (ProxiedPlayer) event.getSender();
-            if (event.isCancelled() || event.isProxyCommand()) return;
+            if (event.isCancelled() || event.isProxyCommand() || event.isCommand()) return;
 
             if (!player.hasPermission("eternalsc.use")) {
                 if (list.contains(player.getUniqueId())) {
