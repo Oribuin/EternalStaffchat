@@ -57,10 +57,9 @@ public class MessageManager extends Manager {
     }
 
     // Define a staffchat one because im lazy.
-    public void sendSCMessage(CommandSender sender, StringPlaceholders placeholders) {
+    public void sendSCMessage(CommandSender sender, ProxiedPlayer receiver, StringPlaceholders placeholders) {
         if (sender instanceof ProxiedPlayer) {
-            ProxiedPlayer player = (ProxiedPlayer) sender;
-            player.sendMessage(TextComponent.fromLegacyText(HexUtils.colorify(placeholders.apply(ConfigManager.Setting.STAFFCHAT_FORMAT.getString()))));
+            receiver.sendMessage(TextComponent.fromLegacyText(HexUtils.colorify(placeholders.apply(ConfigManager.Setting.STAFFCHAT_FORMAT.getString()))));
         }
     }
 
@@ -74,7 +73,7 @@ public class MessageManager extends Manager {
 
             ProxyServer.getInstance().getPlayers().stream()
                     .filter(player -> player.hasPermission("eternalsc.use"))
-                    .forEach(player -> this.sendSCMessage(player, stringPlaceholders));
+                    .forEach(player -> this.sendSCMessage(sender, player, stringPlaceholders));
         } else {
 
             StringPlaceholders stringPlaceholders = StringPlaceholders.builder("sender", sender.getName())
@@ -84,7 +83,7 @@ public class MessageManager extends Manager {
 
             ProxyServer.getInstance().getPlayers().stream()
                     .filter(player -> player.hasPermission("eternalsc.use"))
-                    .forEach(player -> this.sendSCMessage(player, stringPlaceholders));
+                    .forEach(player -> this.sendSCMessage(sender, player, stringPlaceholders));
         }
     }
 }

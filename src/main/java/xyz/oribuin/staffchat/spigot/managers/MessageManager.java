@@ -60,9 +60,9 @@ public class MessageManager extends Manager {
      * Send StaffChat message to player
      */
 
-    public void sendSCMessage(CommandSender sender, StringPlaceholders placeholders) {
+    public void sendSCMessage(CommandSender sender, Player receiver, StringPlaceholders placeholders) {
         if (sender instanceof Player) {
-            sender.spigot().sendMessage(TextComponent.fromLegacyText(HexUtils.colorify(this.parsePlaceholders(sender, placeholders.apply(ConfigManager.Setting.STAFFCHAT_FORMAT.getString())))));
+            receiver.spigot().sendMessage(TextComponent.fromLegacyText(HexUtils.colorify(this.parsePlaceholders(sender, placeholders.apply(ConfigManager.Setting.STAFFCHAT_FORMAT.getString())))));
         }
     }
 
@@ -77,7 +77,7 @@ public class MessageManager extends Manager {
         Bukkit.getOnlinePlayers().stream()
                 .filter(player -> player.hasPermission("eternalsc.use"))
                 .forEach(player -> {
-                    this.sendSCMessage(player, stringPlaceholders);
+                    this.sendSCMessage(sender, player, stringPlaceholders);
 
                     if (ConfigManager.Setting.STAFFCHAT_SOUND_ENABLED.getBoolean()) {
                         player.playSound(player.getLocation(), Sound.valueOf(ConfigManager.Setting.STAFFCHAT_SOUND.getString()), ConfigManager.Setting.STAFFCHAT_SOUND_VOLUME.getInt(), 0);
