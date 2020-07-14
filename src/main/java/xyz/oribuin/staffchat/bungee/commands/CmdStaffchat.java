@@ -1,6 +1,5 @@
 package xyz.oribuin.staffchat.bungee.commands;
 
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -9,14 +8,15 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import xyz.oribuin.staffchat.bungee.StaffChatBungee;
 import xyz.oribuin.staffchat.bungee.managers.MessageManager;
+import xyz.oribuin.staffchat.bungee.utils.HexUtils;
 
 public class CmdStaffchat extends Command {
 
-    private StaffChatBungee plugin;
+    private final StaffChatBungee plugin;
 
-    public CmdStaffchat() {
-        super("staffchat", "", "sc");
-        this.plugin = StaffChatBungee.getInstance();
+    public CmdStaffchat(StaffChatBungee plugin) {
+        super("staffchat", "", "sc", "schat");
+        this.plugin = plugin;
     }
 
     @Override
@@ -34,13 +34,12 @@ public class CmdStaffchat extends Command {
         }
 
         final String msg = String.join(" ", args);
-        this.plugin.sendSc(sender, msg);
+        messageManager.sendSc(sender, msg);
         if (sender instanceof ProxiedPlayer)
             ProxyServer.getInstance().getConsole().sendMessage(msg("[StaffChat] (" + ((ProxiedPlayer) sender).getServer().getInfo().getName() + ") " + sender.getName() + ": " + msg));
     }
 
-    // Define the dumb BaseComponent because Bungeecord sucks ass
     private BaseComponent[] msg(String string) {
-        return TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', string));
+        return TextComponent.fromLegacyText(HexUtils.colorify(string));
     }
 }

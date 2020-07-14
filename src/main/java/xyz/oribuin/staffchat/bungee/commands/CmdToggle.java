@@ -11,11 +11,11 @@ import java.util.UUID;
 
 public class CmdToggle extends Command {
 
-    private StaffChatBungee plugin;
+    private final StaffChatBungee plugin;
 
-    public CmdToggle() {
+    public CmdToggle(StaffChatBungee plugin) {
         super("sctoggle", "", "sct");
-        this.plugin = StaffChatBungee.getInstance();
+        this.plugin = plugin;
     }
 
     @Override

@@ -45,7 +45,7 @@ public class CommandManager extends Manager implements TabExecutor {
         MessageManager messageManager = this.plugin.getMessageManager();
 
         if (args.length == 1 && args[0].toLowerCase().equals("reload")) {
-            onReloadCommand(sender);
+            this.onReloadCommand(sender);
         } else {
             messageManager.sendMessage(sender, "invalid-command");
         }

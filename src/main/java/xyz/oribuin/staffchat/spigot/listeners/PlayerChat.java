@@ -7,21 +7,30 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import xyz.oribuin.staffchat.spigot.StaffChatSpigot;
 import xyz.oribuin.staffchat.spigot.managers.ConfigManager;
+import xyz.oribuin.staffchat.spigot.managers.MessageManager;
 
 import java.util.List;
 import java.util.UUID;
 
 public class PlayerChat implements Listener {
 
+    private final StaffChatSpigot plugin;
+
+    public PlayerChat(StaffChatSpigot plugin) {
+        this.plugin = plugin;
+    }
+
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
-        List<UUID> list = StaffChatSpigot.getInstance().toggleList;
+
+        List<UUID> list = this.plugin.toggleList;
         Player player = event.getPlayer();
+        MessageManager msgM = this.plugin.getMessageManager();
 
 
         if (list.contains(player.getUniqueId())) {
             if (player.hasPermission("eternal.sc")) {
-                StaffChatSpigot.getInstance().sendSc(player, event.getMessage());
+                msgM.sendSc(player, event.getMessage());
                 Bukkit.getConsoleSender().sendMessage("[StaffChat] " + player.getName() + ": " + event.getMessage());
                 event.setCancelled(true);
             } else {
@@ -37,7 +46,7 @@ public class PlayerChat implements Listener {
                 if (event.getMessage().startsWith(string)) {
                     event.setCancelled(true);
                     Bukkit.getConsoleSender().sendMessage("[StaffChat] " + player.getName() + ": " + event.getMessage().substring(1));
-                    StaffChatSpigot.getInstance().sendSc(player, event.getMessage().substring(1));
+                    msgM.sendSc(player, event.getMessage().substring(1));
                 }
             }
         }

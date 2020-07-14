@@ -2,18 +2,22 @@ package xyz.oribuin.staffchat.spigot.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 import xyz.oribuin.staffchat.spigot.StaffChatSpigot;
 import xyz.oribuin.staffchat.spigot.managers.MessageManager;
+import xyz.oribuin.staffchat.spigot.utils.OriCommand;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-public class CmdToggle implements TabExecutor {
+public class CmdToggle extends OriCommand {
+
+    public CmdToggle() {
+        super("sctoggle");
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

@@ -2,6 +2,7 @@ package xyz.oribuin.staffchat.bungee.managers;
 
 import net.md_5.bungee.config.Configuration;
 import xyz.oribuin.staffchat.bungee.StaffChatBungee;
+import xyz.oribuin.staffchat.bungee.utils.FileUtils;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class ConfigManager extends Manager {
     @Override
     public void reload() {
         this.plugin.reloadConfig();
-        this.plugin.createConfig("config.yml");
+        FileUtils.createFile(plugin, "config.yml");
 
         Configuration config = this.plugin.getConfig("config.yml");
         for (ConfigManager.Setting value : ConfigManager.Setting.values())

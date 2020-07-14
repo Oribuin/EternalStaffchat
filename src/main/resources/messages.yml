@@ -1,4 +1,10 @@
-prefix: '&bEternalSC &f» '
+# Change any message to '' to disable the message
+# For 1.16 Users:
+# Use #HEX for hex codes
+# Use <g:#hex:#hex> for gradients. Example: <g:#12c2e9:#c471ed:#f64f59>Text
+# Use <rainbow> for rainbow text. Example: <rainbow>Text
+
+prefix: '<rainbow:0.7>EternalSC #cbcbd3» '
 
 # Command Messages
 commands:
@@ -7,8 +13,6 @@ commands:
 
 # Misc
 reload: '&bYou have reloaded EternalStaffChat &9(&7%version%&9)'
-
-# Error Messages
 invalid-permission: '&cYou do not have permission to execute this command.'
 invalid-command: '&bThat is not a valid command.'
 

@@ -1,9 +1,14 @@
+# For 1.16 Users:
+# Use #HEX for hex codes
+# Use <g:#hex:#hex> for gradients. Example: <g:#12c2e9:#c471ed:#f64f59>Text
+# Use <rainbow> for rainbow text. Example: <rainbow>Text
+
 # Should the plugin send bStats Metrics?
 bstats-metrics: true
 
 staffchat:
-  # Supports PlaceholderAPI
-  format: '&bStaffChat &f» %vault_prefix% &b%sender%: &f%message%'
+  # Supports PlaceholderAPI (Spigot) ChatColor Hex Colors
+  format: '%prefix% %vault_prefix% &b%sender%: &f%message%'
 
   # Shortcuts allow you to quick type in Staffchat without commands
   # Type the shortcuts in front of your message and itl wil send the message in Staffchat
@@ -19,13 +24,4 @@ staffchat:
     sound: 'ENTITY_ARROW_HIT_PLAYER'
     volume: 50
 
-#
-# | Wiki |
-#
-# • Bungeecord •
-# Sound will not work if you are running the plugin on Bungeecord
-# PlaceholderAPI Placeholders will not work if you are running the plugin on Bungeecord
-# You can use %server% in the format to display server name
-#
-# • Spigot •
-# You can use PlaceholderAPI and Sounds if you are running the plugin on Spigot
+# PlaceholderAPI does not work if you are running Bungeecord.

@@ -6,22 +6,23 @@ plugins {
 }
 
 group 'xyz.oribuin'
-version '1.0-B2'
+version '1.0-B3'
 compileJava.options.encoding = 'UTF-8'
 
-sourceCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
-    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    maven { url 'http://repo.extendedclip.com/content/repositories/placeholderapi/' }
-    maven { url 'https://repo.codemc.org/repository/maven-public' }
+    jcenter()
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url = 'http://repo.extendedclip.com/content/repositories/placeholderapi/' }
+    maven { url = 'https://repo.codemc.org/repository/maven-public' }
 }
 
 dependencies {
-    shadow 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
-    shadow 'net.md-5:bungeecord-api:1.15-SNAPSHOT'
+    shadow 'org.spigotmc:spigot-api:1.16.1-R0.1-SNAPSHOT'
+    shadow 'net.md-5:bungeecord-api:1.16-R0.2-SNAPSHOT'
     compileOnly 'me.clip:placeholderapi:2.10.6'
 }
 

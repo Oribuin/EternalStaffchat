@@ -8,12 +8,11 @@ import xyz.oribuin.staffchat.bungee.utils.StringPlaceholders;
 
 public class CmdAdmin extends Command {
 
-    private StaffChatBungee plugin;
+    private final StaffChatBungee plugin;
 
-    public CmdAdmin() {
+    public CmdAdmin(StaffChatBungee plugin) {
         super("scadmin");
-
-        this.plugin = StaffChatBungee.getInstance();
+        this.plugin = plugin;
     }
 
     @Override

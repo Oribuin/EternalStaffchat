@@ -2,7 +2,7 @@ name: EternalStaffchat
 main: xyz.oribuin.staffchat.bungee.StaffChatBungee
 version: '@version@'
 author: Oribuin
-description: 'A simple customizable StaffChat plugin for Spigot'
+description: 'A simple customizable StaffChat plugin for Bungeecord'
 permissions:
   eternalsc.*:
     description: All permissions for EternalStaffchat

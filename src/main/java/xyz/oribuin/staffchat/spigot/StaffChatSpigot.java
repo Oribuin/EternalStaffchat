@@ -1,8 +1,7 @@
 package xyz.oribuin.staffchat.spigot;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Sound;
-import org.bukkit.command.CommandSender;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.oribuin.staffchat.spigot.commands.CmdStaffchat;
 import xyz.oribuin.staffchat.spigot.commands.CmdToggle;
@@ -11,7 +10,7 @@ import xyz.oribuin.staffchat.spigot.listeners.PlayerChat;
 import xyz.oribuin.staffchat.spigot.managers.CommandManager;
 import xyz.oribuin.staffchat.spigot.managers.ConfigManager;
 import xyz.oribuin.staffchat.spigot.managers.MessageManager;
-import xyz.oribuin.staffchat.spigot.utils.StringPlaceholders;
+import xyz.oribuin.staffchat.spigot.utils.OriCommand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +36,12 @@ public class StaffChatSpigot extends JavaPlugin {
             Bukkit.getConsoleSender().sendMessage("[EternalEco] No PlaceholderAPI, Placeholders will not work.");
         }
 
-        // Register Commands
-        getCommand("staffchat").setExecutor(new CmdStaffchat());
-        getCommand("sctoggle").setExecutor(new CmdToggle());
+
+        // Register commands
+        this.registerCommands(new CmdStaffchat(), new CmdToggle());
 
         // Register Listeners
-        Bukkit.getPluginManager().registerEvents(new PlayerChat(), this);
+        this.registerListeners(new PlayerChat(this));
 
         // Register Managers
         this.commandManager = new CommandManager(this);
@@ -61,30 +60,20 @@ public class StaffChatSpigot extends JavaPlugin {
         this.messageManager.reload();
     }
 
-    public CommandManager getCommandManager() {
-        return this.commandManager;
-    }
-
-    public ConfigManager getConfigManager() {
-        return this.configManager;
-    }
-
     public MessageManager getMessageManager() {
         return this.messageManager;
     }
 
-    public void sendSc(CommandSender sender, String message) {
-        StringPlaceholders stringPlaceholders = StringPlaceholders.builder("sender", sender.getName())
-                .addPlaceholder("message", message).build();
 
-        Bukkit.getOnlinePlayers().stream()
-                .filter(player -> player.hasPermission("eternalsc.use"))
-                .forEach(player -> {
-                    messageManager.sendSCMessage(player, stringPlaceholders);
+    private void registerCommands(OriCommand... commands) {
+        for (OriCommand cmd : commands) {
+            cmd.registerCommand();
+        }
+    }
 
-                    if (ConfigManager.Setting.STAFFCHAT_SOUND_ENABLED.getBoolean()) {
-                        player.playSound(player.getLocation(), Sound.valueOf(ConfigManager.Setting.STAFFCHAT_SOUND.getString()), ConfigManager.Setting.STAFFCHAT_SOUND_VOLUME.getInt(), 0);
-                    }
-                });
+    private void registerListeners(Listener... listeners) {
+        for (Listener listener : listeners) {
+            Bukkit.getPluginManager().registerEvents(listener, this);
+        }
     }
 }

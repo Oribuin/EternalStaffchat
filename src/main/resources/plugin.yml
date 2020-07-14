@@ -10,7 +10,7 @@ commands:
   staffchat:
     description: Send a message to the StaffChat.
     usage: /staffchat <mesage>
-    aliases: [sc]
+    aliases: [sc, schat]
 
   scadmin:
     description: All admin commands for EternalStaffChat.
