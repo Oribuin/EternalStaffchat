@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-
 public class StaffChatBungee extends Plugin {
 
     private static StaffChatBungee instance;
@@ -32,6 +31,7 @@ public class StaffChatBungee extends Plugin {
 
     @Override
     public void onEnable() {
+
         instance = this;
 
         this.configManager = new ConfigManager(this);
