@@ -9,16 +9,14 @@ import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 import xyz.oribuin.staffchat.bungee.StaffChatBungee;
 import xyz.oribuin.staffchat.bungee.utils.FileUtils;
-import xyz.oribuin.staffchat.bungee.utils.StringPlaceholders;
 import xyz.oribuin.staffchat.bungee.utils.HexUtils;
+import xyz.oribuin.staffchat.bungee.utils.StringPlaceholders;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 public class MessageManager extends Manager {
 
-    private static final Pattern HEX_PATTERN = Pattern.compile("\\{#([A-Fa-f0-9]){6}}");
     private final static String MESSAGE_CONFIG = "messages.yml";
 
     private Configuration messageConfig;
