@@ -38,12 +38,11 @@ public class PlayerChat implements Listener {
 
             // If the player can't use staffchat and they have statffchat toggled, disable it
             if (!player.hasPermission("eternalsc.use")) {
-                if (list.contains(player.getUniqueId())) {
-                    list.remove(player.getUniqueId());
-                }
-
+                list.remove(player.getUniqueId());
                 return;
             }
+
+            if (!list.contains(player.getUniqueId())) return;
 
             // If the list contains the player and they permission to use the plugin
             if (list.contains(player.getUniqueId()) && player.hasPermission("eternalsc.sc")) {
@@ -59,7 +58,7 @@ public class PlayerChat implements Listener {
             // If Shortcuts are enabled and the player has permission to use staffchat
             if (ConfigManager.Setting.SHORTCUTS_ENABLED.getBoolean() && player.hasPermission("eternalsc.use")) {
                 // Check if they have staffchat toggled on
-                if (list.contains(player.getUniqueId())) return;
+
 
                 // For loop each shortcut
                 for (String string : ConfigManager.Setting.SHORTCUTS.getStringList()) {
